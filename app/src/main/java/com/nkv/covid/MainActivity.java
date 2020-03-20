@@ -134,12 +134,15 @@ public class MainActivity extends BaseActivity {
                 String cases =  String.format(Locale.US, "%,d" ,Long.parseLong(globalData.cases.toString()));
                 String deaths =  String.format(Locale.US, "%,d", Long.parseLong(globalData.deaths.toString()));
                 String recovered =  String.format(Locale.US, "%,d", Long.parseLong(globalData.recovered.toString()));
+                int activeCases = globalData.cases - (globalData.deaths + globalData.recovered);
+                String active =  String.format(Locale.US, "%,d", Long.parseLong(Integer.toString(activeCases)));
 
 
                 GlobalCardModel[] myListData = new GlobalCardModel[] {
                         new GlobalCardModel(getString(R.string.title_card_1), cases, R.drawable.ic_sick ),
                         new GlobalCardModel(getString(R.string.title_card_2), deaths, R.drawable.ic_crying),
                         new GlobalCardModel(getString(R.string.title_card_3), recovered, R.drawable.ic_smile),
+                        new GlobalCardModel(getString(R.string.title_card_4), active, R.drawable.ic_injury),
                 };
 
                 saveGlobalData(myListData);

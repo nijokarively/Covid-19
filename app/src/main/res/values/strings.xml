@@ -13,6 +13,7 @@
     <string name="title_card_1">Cases</string>
     <string name="title_card_2">Deaths</string>
     <string name="title_card_3">Recovered</string>
+    <string name="title_card_4">Active Cases</string>
 
     <!-- About Page -->
     <string name="credits">Credits</string>
