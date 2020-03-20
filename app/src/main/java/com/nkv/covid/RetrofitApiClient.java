@@ -5,7 +5,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitApiClient {
     private static Retrofit retrofit;
-    private static final String BASE_URL = "https://coronavirus-19-api.herokuapp.com";
+    private static final String BASE_URL = "https://covid-19-tracker-api.herokuapp.com";
 
     public static Retrofit getClient() {
         if (retrofit == null) {
