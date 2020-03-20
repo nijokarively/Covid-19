@@ -90,6 +90,8 @@ public class BaseActivity extends AppCompatActivity {
             return "vi";
         } else if (countryName.equals("Diamond Princess")) {
             return "bm";
+        } else if (countryName.equals("Cabo Verde")) {
+            return "cv";
         }
 
         return "";
