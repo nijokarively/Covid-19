@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">COVID-19 Tracker</string>
+    <string name="title_label_1">Global</string>
+    <string name="title_label_2">Countries</string>
+    <string name="title_label_3">About</string>
+    <string name="logo_img">COVID-19 Tracker</string>
+    <string name="title_bar_1">Global COVID-19 Info</string>
+    <string name="title_bar_2">COVID-19 by Country</string>
+    <string name="title_bar_3">About</string>
+
+    <!-- Global Page -->
+    <string name="tag_card_placeholder">GLOBAL</string>
+    <string name="title_card_1">Cases</string>
+    <string name="title_card_2">Deaths</string>
+    <string name="title_card_3">Recovered</string>
+
+    <!-- About Page -->
+    <string name="credits">Credits</string>
+    <string name="credits_data">Data source: worldometers.info</string>
+    <string name="credits_flags">Flags: circle-flags maintained by HatScripts @GitHub</string>
+    <string name="credits_emojis">Emoji: emojis-pack maintained by Freepik @Flaticon</string>
+    <string name="credits_icons">Icons: maintained by Fonticons @Font Awesome</string>
+
+    <string name="resources">Resources</string>
+    <string name="resources_who"><a href="https://www.who.int/emergencies/diseases/novel-coronavirus-2019">World Health Organization (WHO)</a></string>
+    <string name="resources_cdc"><a href="https://www.cdc.gov/coronavirus/2019-ncov/index.html">Centers for Disease Control and Prevention (CDC)</a></string>
+    <string name="resources_nhs"><a href="https://www.nhs.uk/conditions/coronavirus-covid-19/">National Health Service (NHS)</a></string>
+</resources>

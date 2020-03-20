@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@+id/navigation_global">
+
+    <fragment
+        android:id="@+id/navigation_global"
+        android:name="com.nkv.covid.ui.global.GlobalFragment"
+        android:label="@string/title_label_1"
+        tools:layout="@layout/fragment_global" />
+
+    <fragment
+        android:id="@+id/navigation_countries"
+        android:name="com.nkv.covid.ui.countries.CountriesFragment"
+        android:label="@string/title_label_2"
+        tools:layout="@layout/fragment_countries" />
+
+    <fragment
+        android:id="@+id/navigation_about"
+        android:name="com.nkv.covid.ui.about.AboutFragment"
+        android:label="@string/title_label_3"
+        tools:layout="@layout/fragment_about" />
+</navigation>

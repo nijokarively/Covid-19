@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    card_view:cardBackgroundColor="@color/colorAccent"
+    card_view:cardCornerRadius="@dimen/_3ssp"
+    card_view:cardElevation="@dimen/_2ssp"
+    card_view:cardUseCompatPadding="true"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/_110sdp"
+        android:orientation="horizontal"
+        android:layout_centerVertical = "true"
+        >
+        <ImageView
+            android:id="@+id/imageView"
+            android:tag="image_tag"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_50ssp"
+            android:layout_margin="@dimen/_5ssp"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_globe_europe_solid"/>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10ssp"
+            android:layout_weight="2"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:id="@+id/textViewName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:textSize="@dimen/_18sdp"
+                android:text="Stat Name"
+                android:textColor="@color/white"
+                android:textAppearance="?android:attr/textAppearanceLarge"/>
+            <TextView
+                android:id="@+id/textViewCases"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:textSize="@dimen/_10sdp"
+                android:text="Stat Value"
+                android:textColor="@color/defaultText"
+                android:textAppearance="?android:attr/textAppearanceMedium"/>
+            <TextView
+                android:id="@+id/textViewDeaths"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:textSize="@dimen/_10sdp"
+                android:text="Stat Value"
+                android:textColor="@color/defaultText"
+                android:textAppearance="?android:attr/textAppearanceMedium"/>
+            <TextView
+                android:id="@+id/textViewRecovered"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:textSize="@dimen/_10sdp"
+                android:text="Stat Value"
+                android:textColor="@color/defaultText"
+                android:textAppearance="?android:attr/textAppearanceMedium"/>
+        </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
