@@ -5,10 +5,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.nkv.covid.R;
@@ -21,6 +20,7 @@ public class GlobalCardAdapter extends RecyclerView.Adapter<GlobalCardAdapter.Vi
     public GlobalCardAdapter(GlobalCardModel[] listdata) {
         this.listdata = listdata;
     }
+    @NonNull
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
@@ -49,16 +49,14 @@ public class GlobalCardAdapter extends RecyclerView.Adapter<GlobalCardAdapter.Vi
         return listdata.length;
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        public ImageView imageView;
-        public TextView textViewName,textViewValue;
-        public RelativeLayout relativeLayout;
-        public ViewHolder(View itemView) {
+    static class ViewHolder extends RecyclerView.ViewHolder {
+        ImageView imageView;
+        TextView textViewName,textViewValue;
+        ViewHolder(View itemView) {
             super(itemView);
             this.imageView = (ImageView) itemView.findViewById(R.id.imageView);
             this.textViewName = (TextView) itemView.findViewById(R.id.textViewName);
             this.textViewValue = (TextView) itemView.findViewById(R.id.textViewValue);
-//            relativeLayout = (RelativeLayout)itemView.findViewById(R.id.global_recycler_view);
         }
     }
 }

@@ -6,16 +6,15 @@ import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.nkv.covid.R;
 import com.nkv.covid.model.CountryCardModel;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 
@@ -27,6 +26,7 @@ public class CountryCardAdapter extends RecyclerView.Adapter<CountryCardAdapter.
     public CountryCardAdapter(CountryCardModel[] listdata) {
         this.listdata = listdata;
     }
+    @NonNull
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
@@ -65,11 +65,10 @@ public class CountryCardAdapter extends RecyclerView.Adapter<CountryCardAdapter.
         }
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        public ImageView imageView;
-        public TextView textViewName, textViewCases, textViewDeaths, textViewRecovered;
-        public RelativeLayout relativeLayout;
-        public ViewHolder(View itemView) {
+    static class ViewHolder extends RecyclerView.ViewHolder {
+        ImageView imageView;
+        TextView textViewName, textViewCases, textViewDeaths, textViewRecovered;
+        ViewHolder(View itemView) {
             super(itemView);
             this.imageView = (ImageView) itemView.findViewById(R.id.imageView);
             this.textViewName = (TextView) itemView.findViewById(R.id.textViewName);

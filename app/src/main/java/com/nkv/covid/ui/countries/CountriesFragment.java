@@ -20,6 +20,8 @@ import com.nkv.covid.R;
 import com.nkv.covid.adapter.CountryCardAdapter;
 import com.nkv.covid.model.CountryCardModel;
 
+import java.util.Objects;
+
 
 public class CountriesFragment extends Fragment {
 
@@ -36,10 +38,10 @@ public class CountriesFragment extends Fragment {
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState){
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
 
-        ((MainActivity) getActivity()).setActionBarTitle(getString(R.string.title_bar_2));
+        ((MainActivity) Objects.requireNonNull(getActivity())).setActionBarTitle(getString(R.string.title_bar_2));
 
         // /You will setup the action bar with pull to refresh layout
         mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
@@ -47,7 +49,7 @@ public class CountriesFragment extends Fragment {
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                ((MainActivity) getActivity()).fetchCountriesData(view);
+                ((MainActivity) Objects.requireNonNull(getActivity())).fetchCountriesData();
                 searchView.setQuery("", false);
                 searchView.clearFocus();
                 mSwipeRefreshLayout.setRefreshing(false);
@@ -61,14 +63,13 @@ public class CountriesFragment extends Fragment {
                 android.R.color.holo_red_light);
 
         try{
-
-            CountryCardModel[] myListData = ((MainActivity) getActivity()).getCountriesSavedData(view);
+            CountryCardModel[] myListData = ((MainActivity) getActivity()).getCountriesSavedData();
 
             if (myListData == null)
             {
-                ((MainActivity) getActivity()).fetchCountriesData(view);
+                ((MainActivity) getActivity()).fetchCountriesData();
             }else{
-                ((MainActivity) getActivity()).outputCountriesData(view, myListData);
+                ((MainActivity) getActivity()).outputCountriesData(myListData);
             }
         } catch (Exception e){
             e.printStackTrace();
@@ -78,15 +79,16 @@ public class CountriesFragment extends Fragment {
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.menu_search, menu);
         try {
             // Associate searchable configuration with the SearchView
             SearchManager searchManager =
-                    (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
+                    (SearchManager) Objects.requireNonNull(getActivity()).getSystemService(Context.SEARCH_SERVICE);
             searchView =
                     (SearchView) menu.findItem(R.id.action_search).getActionView();
+            assert searchManager != null;
             searchView.setSearchableInfo(
                     searchManager.getSearchableInfo(getActivity().getComponentName()));
             searchView.setMaxWidth(Integer.MAX_VALUE);
@@ -94,14 +96,14 @@ public class CountriesFragment extends Fragment {
                 @Override
                 public boolean onQueryTextSubmit(String s) {
                     // do your search
-                    mAdapter = ((MainActivity) getActivity()).getCountryAdapter();
+                    mAdapter = ((MainActivity) Objects.requireNonNull(getActivity())).getCountryAdapter();
                     mAdapter.getFilter().filter(s);
                     return false;
                 }
 
                 @Override
                 public boolean onQueryTextChange(String s) {
-                    mAdapter = ((MainActivity) getActivity()).getCountryAdapter();
+                    mAdapter = ((MainActivity) Objects.requireNonNull(getActivity())).getCountryAdapter();
                     mAdapter.getFilter().filter(s);
                     return false;
                 }

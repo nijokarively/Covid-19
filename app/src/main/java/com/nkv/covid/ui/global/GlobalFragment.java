@@ -1,6 +1,7 @@
 package com.nkv.covid.ui.global;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,8 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.nkv.covid.MainActivity;
 import com.nkv.covid.R;
 import com.nkv.covid.model.GlobalCardModel;
+
+import java.util.Objects;
 
 public class GlobalFragment extends Fragment {
 
@@ -30,7 +33,7 @@ public class GlobalFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 //        String cases, deaths, recovered;
 
-        ((MainActivity) getActivity()).setActionBarTitle(getString(R.string.title_bar_1));
+        ((MainActivity) Objects.requireNonNull(getActivity())).setActionBarTitle(getString(R.string.title_bar_1));
 
         // /You will setup the action bar with pull to refresh layout
         mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
@@ -38,7 +41,7 @@ public class GlobalFragment extends Fragment {
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                ((MainActivity) getActivity()).fetchGlobalData();
+                ((MainActivity) Objects.requireNonNull(getActivity())).fetchGlobalData();
                 mSwipeRefreshLayout.setRefreshing(false);
             }
         });
@@ -49,7 +52,6 @@ public class GlobalFragment extends Fragment {
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
 
-//        ((MainActivity) getActivity()).fetchGlobalData(view);
         try{
             GlobalCardModel[] myListData = ((MainActivity) getActivity()).getGlobalSavedData();
 
