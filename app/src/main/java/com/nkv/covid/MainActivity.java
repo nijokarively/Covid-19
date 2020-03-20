@@ -106,7 +106,7 @@ public class MainActivity extends BaseActivity {
 
             @Override
             public void onFailure(@NonNull Call<List<CountryRestModel>> call, @NonNull Throwable t) {
-                Toast.makeText(MainActivity.this, "Failed loading data!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Check your Internet connection!", Toast.LENGTH_LONG).show();
                 CountryCardModel[] myListData = getCountriesSavedData();
                 outputCountriesData(myListData);
             }
@@ -148,7 +148,7 @@ public class MainActivity extends BaseActivity {
 
             @Override
             public void onFailure(@NonNull Call<GlobalRestModel>call, @NonNull Throwable t) {
-                Toast.makeText(MainActivity.this, "Failed loading data!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Check your Internet connection!", Toast.LENGTH_LONG).show();
                 GlobalCardModel[] myListData = getGlobalSavedData();
                 outputGlobalData(myListData);
             }

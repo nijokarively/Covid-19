@@ -45,7 +45,7 @@ public class BaseActivity extends AppCompatActivity {
             }
         }
 
-        // Fallback for ISO code issues
+        // Fallback for ISO code not found
         if (countryName.equals("USA")) {
             return "us";
         } else if (countryName.equals("UK")) {
@@ -173,13 +173,12 @@ public class BaseActivity extends AppCompatActivity {
 
                     myListData[i] = new CountryCardModel(countryName, strCases, strDeaths, strRecovered, countryImgId);
                 }
-
                 saveCountriesData(myListData);
             }
 
             @Override
             public void onFailure(@NonNull Call<List<CountryRestModel>> call, @NonNull Throwable t) {
-                Toast.makeText(getApplicationContext(), "Failed loading data!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Check your Internet connection!", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -207,7 +206,6 @@ public class BaseActivity extends AppCompatActivity {
         prefsEditor.apply();
     }
 
-
     public void fetchGlobalData(){
         RetrofitApiInterface apiService =
                 RetrofitApiClient.getClient().create(RetrofitApiInterface.class);
@@ -221,20 +219,18 @@ public class BaseActivity extends AppCompatActivity {
                 String deaths =  String.format(Locale.US, "%,d", Long.parseLong(globalData.deaths.toString()));
                 String recovered =  String.format(Locale.US, "%,d", Long.parseLong(globalData.recovered.toString()));
 
-
                 GlobalCardModel[] myListData = new GlobalCardModel[] {
                         new GlobalCardModel(getString(R.string.title_card_1), cases, R.drawable.ic_sick ),
                         new GlobalCardModel(getString(R.string.title_card_2), deaths, R.drawable.ic_crying),
                         new GlobalCardModel(getString(R.string.title_card_3), recovered, R.drawable.ic_smile),
 
                 };
-
                 saveGlobalData(myListData);
             }
 
             @Override
             public void onFailure(@NonNull Call<GlobalRestModel>call, @NonNull Throwable t) {
-                Toast.makeText(getApplicationContext(), "Failed loading data!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Check your Internet connection!", Toast.LENGTH_LONG).show();
             }
         });
     }

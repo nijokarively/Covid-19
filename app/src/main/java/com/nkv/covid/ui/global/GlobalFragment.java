@@ -1,6 +1,7 @@
 package com.nkv.covid.ui.global;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,7 +52,6 @@ public class GlobalFragment extends Fragment {
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
 
-//        ((MainActivity) getActivity()).fetchGlobalData(view);
         try{
             GlobalCardModel[] myListData = ((MainActivity) getActivity()).getGlobalSavedData();
 

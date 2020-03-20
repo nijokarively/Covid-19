@@ -63,7 +63,6 @@ public class CountriesFragment extends Fragment {
                 android.R.color.holo_red_light);
 
         try{
-
             CountryCardModel[] myListData = ((MainActivity) getActivity()).getCountriesSavedData();
 
             if (myListData == null)

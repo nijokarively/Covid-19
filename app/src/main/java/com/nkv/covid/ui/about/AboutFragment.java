@@ -13,6 +13,8 @@ import androidx.fragment.app.Fragment;
 import com.nkv.covid.MainActivity;
 import com.nkv.covid.R;
 
+import java.util.Objects;
+
 public class AboutFragment extends Fragment {
 
 
@@ -24,10 +26,10 @@ public class AboutFragment extends Fragment {
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState){
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
 
-        ((MainActivity) getActivity()).setActionBarTitle(getString(R.string.title_bar_3));
+        ((MainActivity) Objects.requireNonNull(getActivity())).setActionBarTitle(getString(R.string.title_bar_3));
 
         final TextView textResources = view.findViewById(R.id.textResources);
         final TextView textResourcesWho = view.findViewById(R.id.textResourcesWho);
