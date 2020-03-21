@@ -1,6 +1,7 @@
 package com.nkv.covid.ui.global;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import java.util.Objects;
 public class GlobalFragment extends Fragment {
 
     private SwipeRefreshLayout mSwipeRefreshLayout;
+    private Handler mHandler = new Handler();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -41,15 +43,18 @@ public class GlobalFragment extends Fragment {
             @Override
             public void onRefresh() {
                 ((MainActivity) Objects.requireNonNull(getActivity())).reloadGlobalData();
-                mSwipeRefreshLayout.setRefreshing(false);
+
+                mHandler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mSwipeRefreshLayout.setRefreshing(false);
+                    }
+                }, 3000);
             }
         });
 
         // Configure the refreshing colors
-        mSwipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_bright,
-                android.R.color.holo_green_light,
-                android.R.color.holo_orange_light,
-                android.R.color.holo_red_light);
+        mSwipeRefreshLayout.setColorSchemeResources(R.color.colorPrimaryDark, R.color.colorPrimary, R.color.colorAccent);
 
     }
 
