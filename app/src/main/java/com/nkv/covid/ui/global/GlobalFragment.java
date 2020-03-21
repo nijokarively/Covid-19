@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.nkv.covid.BaseActivity;
 import com.nkv.covid.MainActivity;
 import com.nkv.covid.R;
 import com.nkv.covid.model.GlobalCardModel;
@@ -52,8 +53,28 @@ public class GlobalFragment extends Fragment {
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
 
+//        try{
+//            GlobalCardModel[] myListData = ((MainActivity) getActivity()).getGlobalSavedData();
+//
+//            if (myListData == null)
+//            {
+//                ((MainActivity) getActivity()).fetchGlobalData();
+//            }else{
+//                ((MainActivity) getActivity()).outputGlobalData(myListData);
+//            }
+//        } catch (Exception e){
+//            e.printStackTrace();
+//            Toast.makeText(getContext(), "Failed loading data!", Toast.LENGTH_SHORT).show();
+//        }
+
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        //OnResume Fragment
         try{
-            GlobalCardModel[] myListData = ((MainActivity) getActivity()).getGlobalSavedData();
+            GlobalCardModel[] myListData = ((MainActivity) Objects.requireNonNull(getActivity())).getGlobalSavedData();
 
             if (myListData == null)
             {
@@ -65,14 +86,6 @@ public class GlobalFragment extends Fragment {
             e.printStackTrace();
             Toast.makeText(getContext(), "Failed loading data!", Toast.LENGTH_SHORT).show();
         }
-
-    }
-
-    @Override
-    public void onResume(){
-        super.onResume();
-        //OnResume Fragment
-        ((MainActivity) Objects.requireNonNull(getActivity())).fetchGlobalData();
     }
 
     @Override

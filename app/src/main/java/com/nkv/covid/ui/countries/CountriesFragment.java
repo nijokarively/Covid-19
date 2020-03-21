@@ -15,6 +15,7 @@ import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.nkv.covid.BaseActivity;
 import com.nkv.covid.MainActivity;
 import com.nkv.covid.R;
 import com.nkv.covid.adapter.CountryCardAdapter;
@@ -62,19 +63,19 @@ public class CountriesFragment extends Fragment {
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
 
-        try{
-            CountryCardModel[] myListData = ((MainActivity) getActivity()).getCountriesSavedData();
-
-            if (myListData == null)
-            {
-                ((MainActivity) getActivity()).fetchCountriesData();
-            }else{
-                ((MainActivity) getActivity()).outputCountriesData(myListData);
-            }
-        } catch (Exception e){
-            e.printStackTrace();
-            Toast.makeText(getContext(), "Failed loading data!", Toast.LENGTH_SHORT).show();
-        }
+//        try{
+//            CountryCardModel[] myListData = ((MainActivity) getActivity()).getCountriesSavedData();
+//
+//            if (myListData == null)
+//            {
+//                ((MainActivity) getActivity()).fetchCountriesData();
+//            }else{
+//                ((MainActivity) getActivity()).outputCountriesData(myListData);
+//            }
+//        } catch (Exception e){
+//            e.printStackTrace();
+//            Toast.makeText(getContext(), "Failed loading data!", Toast.LENGTH_SHORT).show();
+//        }
 
     }
 
@@ -117,7 +118,19 @@ public class CountriesFragment extends Fragment {
     public void onResume(){
         super.onResume();
         //OnResume Fragment
-        ((MainActivity) Objects.requireNonNull(getActivity())).fetchCountriesData();
+        try{
+            CountryCardModel[] myListData = ((MainActivity) Objects.requireNonNull(getActivity())).getCountriesSavedData();
+
+            if (myListData == null)
+            {
+                ((MainActivity) getActivity()).fetchCountriesData();
+            }else{
+                ((MainActivity) getActivity()).outputCountriesData(myListData);
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+            Toast.makeText(getContext(), "Failed loading data!", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
