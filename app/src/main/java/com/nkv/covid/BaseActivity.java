@@ -1,21 +1,16 @@
 package com.nkv.covid;
 
+import android.content.Context;
 import android.content.SharedPreferences;
-import android.widget.Toast;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.nkv.covid.MainActivity;
-import com.nkv.covid.R;
-import com.nkv.covid.RetrofitApiClient;
-import com.nkv.covid.RetrofitApiInterface;
 import com.nkv.covid.adapter.CountryCardAdapter;
-import com.nkv.covid.adapter.GlobalCardAdapter;
 import com.nkv.covid.model.CountryCardModel;
 import com.nkv.covid.model.CountryRestModel;
 import com.nkv.covid.model.GlobalCardModel;
@@ -35,6 +30,14 @@ public class BaseActivity extends AppCompatActivity {
     private CountryCardAdapter mAdapter;
     private SharedPreferences mPrefs;
     private SharedPreferences.Editor prefsEditor;
+
+    boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        assert connectivityManager != null;
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
 
     public String getCountryCode(String countryName) {
         String[] isoCountryCodes = Locale.getISOCountries();
