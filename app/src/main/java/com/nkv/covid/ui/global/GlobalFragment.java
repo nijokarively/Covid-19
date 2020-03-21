@@ -68,4 +68,16 @@ public class GlobalFragment extends Fragment {
 
     }
 
+    @Override
+    public void onResume(){
+        super.onResume();
+        //OnResume Fragment
+        ((MainActivity) Objects.requireNonNull(getActivity())).fetchGlobalData();
+    }
+
+    @Override
+    public void onStop(){
+        super.onStop();
+    }
+
 }

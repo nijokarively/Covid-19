@@ -113,4 +113,15 @@ public class CountriesFragment extends Fragment {
         }catch(Exception e){e.printStackTrace();}
     }
 
+    @Override
+    public void onResume(){
+        super.onResume();
+        //OnResume Fragment
+        ((MainActivity) Objects.requireNonNull(getActivity())).fetchCountriesData();
+    }
+
+    @Override
+    public void onStop(){
+        super.onStop();
+    }
 }
