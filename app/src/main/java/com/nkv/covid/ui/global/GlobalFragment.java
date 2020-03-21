@@ -53,20 +53,6 @@ public class GlobalFragment extends Fragment {
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
 
-//        try{
-//            GlobalCardModel[] myListData = ((MainActivity) getActivity()).getGlobalSavedData();
-//
-//            if (myListData == null)
-//            {
-//                ((MainActivity) getActivity()).fetchGlobalData();
-//            }else{
-//                ((MainActivity) getActivity()).outputGlobalData(myListData);
-//            }
-//        } catch (Exception e){
-//            e.printStackTrace();
-//            Toast.makeText(getContext(), "Failed loading data!", Toast.LENGTH_SHORT).show();
-//        }
-
     }
 
     @Override

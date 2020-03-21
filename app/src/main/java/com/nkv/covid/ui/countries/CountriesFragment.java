@@ -62,21 +62,6 @@ public class CountriesFragment extends Fragment {
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
-
-//        try{
-//            CountryCardModel[] myListData = ((MainActivity) getActivity()).getCountriesSavedData();
-//
-//            if (myListData == null)
-//            {
-//                ((MainActivity) getActivity()).fetchCountriesData();
-//            }else{
-//                ((MainActivity) getActivity()).outputCountriesData(myListData);
-//            }
-//        } catch (Exception e){
-//            e.printStackTrace();
-//            Toast.makeText(getContext(), "Failed loading data!", Toast.LENGTH_SHORT).show();
-//        }
-
     }
 
     @Override
