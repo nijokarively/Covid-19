@@ -2,6 +2,8 @@ package com.nkv.covid;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.SparseArray;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -13,6 +15,8 @@ import com.nkv.covid.model.GlobalCardModel;
 import com.nkv.covid.model.GlobalRestModel;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -30,13 +34,14 @@ import retrofit2.Response;
 
 public class MainActivity extends BaseActivity {
 
-    private SharedPreferences mPrefs;
-    private SharedPreferences.Editor prefsEditor;
+    SparseArray<Fragment> myFragments;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        myFragments = new SparseArray<Fragment>();
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
@@ -47,7 +52,14 @@ public class MainActivity extends BaseActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
+        navView.setOnNavigationItemReselectedListener(new BottomNavigationView.OnNavigationItemReselectedListener() {
+            @Override
+            public void onNavigationItemReselected(@NonNull MenuItem item) {
+                // Do nothing to ignore the reselection
+            }
+        });
     }
+
 
     public void setActionBarTitle(String title) {
         Objects.requireNonNull(getSupportActionBar()).setTitle(title);
