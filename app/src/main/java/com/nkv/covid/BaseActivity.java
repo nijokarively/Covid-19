@@ -1,21 +1,16 @@
 package com.nkv.covid;
 
+import android.content.Context;
 import android.content.SharedPreferences;
-import android.widget.Toast;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.nkv.covid.MainActivity;
-import com.nkv.covid.R;
-import com.nkv.covid.RetrofitApiClient;
-import com.nkv.covid.RetrofitApiInterface;
 import com.nkv.covid.adapter.CountryCardAdapter;
-import com.nkv.covid.adapter.GlobalCardAdapter;
 import com.nkv.covid.model.CountryCardModel;
 import com.nkv.covid.model.CountryRestModel;
 import com.nkv.covid.model.GlobalCardModel;
@@ -36,6 +31,14 @@ public class BaseActivity extends AppCompatActivity {
     private SharedPreferences mPrefs;
     private SharedPreferences.Editor prefsEditor;
 
+    boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        assert connectivityManager != null;
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
     public String getCountryCode(String countryName) {
         String[] isoCountryCodes = Locale.getISOCountries();
         for (String code : isoCountryCodes) {
@@ -46,52 +49,53 @@ public class BaseActivity extends AppCompatActivity {
         }
 
         // Fallback for ISO code not found
-        if (countryName.equals("USA")) {
-            return "us";
-        } else if (countryName.equals("UK")) {
-            return "gb";
-        } else if (countryName.equals("S. Korea")) {
-            return "kr";
-        } else if (countryName.equals("UAE")) {
-            return "ae";
-        } else if (countryName.equals("Faeroe Islands")) {
-            return "fo";
-        } else if (countryName.equals("Bosnia and Herzegovina")) {
-            return "ba";
-        } else if (countryName.equals("North Macedonia")) {
-            return "mk";
-        } else if (countryName.equals("Macao")) {
-            return "mo";
-        } else if (countryName.equals("DRC")) {
-            return "cd";
-        } else if (countryName.equals("Ivory Coast")) {
-            return "ci";
-        } else if (countryName.equals("Trinidad and Tobago")) {
-            return "tt";
-        } else if (countryName.equals("St. Barth")) {
-            return "bl";
-        } else if (countryName.equals("Saint Martin")) {
-            return "mf";
-        } else if (countryName.equals("Saint Lucia")) {
-            return "lc";
-        } else if (countryName.equals("Antigua and Barbuda")) {
-            return "ag";
-        } else if (countryName.equals("CAR")) {
-            return "cf";
-        } else if (countryName.equals("Congo")) {
-            return "cg";
-        } else if (countryName.equals("St. Vincent Grenadines")) {
-            return "vc";
-        } else if (countryName.equals("Eswatini")) {
-            return "sz";
-        } else if (countryName.equals("Channel Islands")) {
-            return "je";
-        } else if (countryName.equals("U.S. Virgin Islands")) {
-            return "vi";
-        } else if (countryName.equals("Diamond Princess")) {
-            return "bm";
-        } else if (countryName.equals("Cabo Verde")) {
-            return "cv";
+        switch (countryName) {
+            case "USA":
+                return "us";
+            case "UK":
+                return "gb";
+            case "S. Korea":
+                return "kr";
+            case "UAE":
+                return "ae";
+            case "Faeroe Islands":
+                return "fo";
+            case "Bosnia and Herzegovina":
+                return "ba";
+            case "North Macedonia":
+                return "mk";
+            case "Macao":
+                return "mo";
+            case "DRC":
+                return "cd";
+            case "Ivory Coast":
+                return "ci";
+            case "Trinidad and Tobago":
+                return "tt";
+            case "St. Barth":
+                return "bl";
+            case "Saint Martin":
+                return "mf";
+            case "Saint Lucia":
+                return "lc";
+            case "Antigua and Barbuda":
+                return "ag";
+            case "CAR":
+                return "cf";
+            case "Congo":
+                return "cg";
+            case "St. Vincent Grenadines":
+                return "vc";
+            case "Eswatini":
+                return "sz";
+            case "Channel Islands":
+                return "je";
+            case "U.S. Virgin Islands":
+                return "vi";
+            case "Diamond Princess":
+                return "bm";
+            case "Cabo Verde":
+                return "cv";
         }
 
         return "";
