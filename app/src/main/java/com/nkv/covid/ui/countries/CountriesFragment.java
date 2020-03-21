@@ -3,6 +3,7 @@ package com.nkv.covid.ui.countries;
 import android.app.SearchManager;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -15,7 +16,6 @@ import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.nkv.covid.BaseActivity;
 import com.nkv.covid.MainActivity;
 import com.nkv.covid.R;
 import com.nkv.covid.adapter.CountryCardAdapter;
@@ -29,6 +29,7 @@ public class CountriesFragment extends Fragment {
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private CountryCardAdapter mAdapter;
     private SearchView searchView;
+    private Handler mHandler = new Handler();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -50,18 +51,22 @@ public class CountriesFragment extends Fragment {
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                ((MainActivity) Objects.requireNonNull(getActivity())).fetchCountriesData();
+                ((MainActivity) Objects.requireNonNull(getActivity())).reloadCountriesData();
+
                 searchView.setQuery("", false);
                 searchView.clearFocus();
-                mSwipeRefreshLayout.setRefreshing(false);
+
+                mHandler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mSwipeRefreshLayout.setRefreshing(false);
+                    }
+                }, 3000);
             }
         });
 
         // Configure the refreshing colors
-        mSwipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_bright,
-                android.R.color.holo_green_light,
-                android.R.color.holo_orange_light,
-                android.R.color.holo_red_light);
+        mSwipeRefreshLayout.setColorSchemeResources(R.color.colorPrimaryDark, R.color.colorPrimary, R.color.colorAccent);
     }
 
     @Override
@@ -104,22 +109,18 @@ public class CountriesFragment extends Fragment {
         super.onResume();
         //OnResume Fragment
         try{
+
             CountryCardModel[] myListData = ((MainActivity) Objects.requireNonNull(getActivity())).getCountriesSavedData();
 
             if (myListData == null)
             {
-                ((MainActivity) getActivity()).fetchCountriesData();
+                ((MainActivity) getActivity()).reloadCountriesData();
             }else{
                 ((MainActivity) getActivity()).outputCountriesData(myListData);
             }
         } catch (Exception e){
             e.printStackTrace();
-            Toast.makeText(getContext(), "Failed loading data!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Oops can't load data!", Toast.LENGTH_SHORT).show();
         }
-    }
-
-    @Override
-    public void onStop(){
-        super.onStop();
     }
 }
