@@ -1,7 +1,6 @@
 package com.nkv.covid.ui.global;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.nkv.covid.BaseActivity;
 import com.nkv.covid.MainActivity;
 import com.nkv.covid.R;
 import com.nkv.covid.model.GlobalCardModel;
@@ -42,7 +40,7 @@ public class GlobalFragment extends Fragment {
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                ((MainActivity) Objects.requireNonNull(getActivity())).fetchGlobalData();
+                ((MainActivity) Objects.requireNonNull(getActivity())).reloadGlobalData();
                 mSwipeRefreshLayout.setRefreshing(false);
             }
         });
@@ -60,17 +58,18 @@ public class GlobalFragment extends Fragment {
         super.onResume();
         //OnResume Fragment
         try{
+
             GlobalCardModel[] myListData = ((MainActivity) Objects.requireNonNull(getActivity())).getGlobalSavedData();
 
             if (myListData == null)
             {
-                ((MainActivity) getActivity()).fetchGlobalData();
+                ((MainActivity) getActivity()).reloadGlobalData();
             }else{
                 ((MainActivity) getActivity()).outputGlobalData(myListData);
             }
         } catch (Exception e){
             e.printStackTrace();
-            Toast.makeText(getContext(), "Failed loading data!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Oops can't load data!", Toast.LENGTH_SHORT).show();
         }
     }
 

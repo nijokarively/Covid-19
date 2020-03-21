@@ -50,7 +50,7 @@ public class CountriesFragment extends Fragment {
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                ((MainActivity) Objects.requireNonNull(getActivity())).fetchCountriesData();
+                ((MainActivity) Objects.requireNonNull(getActivity())).reloadCountriesData();
                 searchView.setQuery("", false);
                 searchView.clearFocus();
                 mSwipeRefreshLayout.setRefreshing(false);
@@ -104,17 +104,18 @@ public class CountriesFragment extends Fragment {
         super.onResume();
         //OnResume Fragment
         try{
+
             CountryCardModel[] myListData = ((MainActivity) Objects.requireNonNull(getActivity())).getCountriesSavedData();
 
             if (myListData == null)
             {
-                ((MainActivity) getActivity()).fetchCountriesData();
+                ((MainActivity) getActivity()).reloadCountriesData();
             }else{
                 ((MainActivity) getActivity()).outputCountriesData(myListData);
             }
         } catch (Exception e){
             e.printStackTrace();
-            Toast.makeText(getContext(), "Failed loading data!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Oops can't load data!", Toast.LENGTH_SHORT).show();
         }
     }
 
