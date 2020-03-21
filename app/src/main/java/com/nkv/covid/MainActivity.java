@@ -7,9 +7,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.nkv.covid.adapter.CountryCardAdapter;
 import com.nkv.covid.adapter.GlobalCardAdapter;
 import com.nkv.covid.model.CountryCardModel;
-import com.nkv.covid.model.CountryRestModel;
 import com.nkv.covid.model.GlobalCardModel;
-import com.nkv.covid.model.GlobalRestModel;
 
 import androidx.annotation.NonNull;
 import androidx.navigation.NavController;
@@ -19,13 +17,7 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.List;
-import java.util.Locale;
 import java.util.Objects;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class MainActivity extends BaseActivity {
 
