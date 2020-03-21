@@ -180,7 +180,7 @@ public class BaseActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(@NonNull Call<List<CountryRestModel>> call, @NonNull Throwable t) {
-                Toast.makeText(getApplicationContext(), "Check your Internet connection!", Toast.LENGTH_LONG).show();
+
             }
         });
     }
@@ -238,7 +238,7 @@ public class BaseActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(@NonNull Call<GlobalRestModel>call, @NonNull Throwable t) {
-                Toast.makeText(getApplicationContext(), "Check your Internet connection!", Toast.LENGTH_LONG).show();
+
             }
         });
     }
