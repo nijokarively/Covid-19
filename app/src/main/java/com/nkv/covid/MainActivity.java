@@ -50,20 +50,24 @@ public class MainActivity extends BaseActivity {
 
     public void outputCountriesData(CountryCardModel[] myListData){
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.countries_recycler_view);
-
-        setCountryAdapter(new CountryCardAdapter(myListData));
-        CountryCardAdapter mAdapter = getCountryAdapter();
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
-        recyclerView.setAdapter(mAdapter);
+        if (recyclerView != null){
+            setCountryAdapter(new CountryCardAdapter(myListData));
+            CountryCardAdapter mAdapter = getCountryAdapter();
+            recyclerView.setHasFixedSize(true);
+            recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+            recyclerView.setAdapter(mAdapter);
+        }
     }
 
     public void outputGlobalData(GlobalCardModel[] myListData){
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.global_recycler_view);
-        GlobalCardAdapter adapter = new GlobalCardAdapter(myListData);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
-        recyclerView.setAdapter(adapter);
+
+        if (recyclerView != null){
+            GlobalCardAdapter adapter = new GlobalCardAdapter(myListData);
+            recyclerView.setHasFixedSize(true);
+            recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+            recyclerView.setAdapter(adapter);
+        }
     }
 
 

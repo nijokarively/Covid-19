@@ -30,6 +30,9 @@ public class CountriesFragment extends Fragment {
     private CountryCardAdapter mAdapter;
     private SearchView searchView;
     private Handler mHandler = new Handler();
+    private Handler rHandler = new Handler();
+    private Runnable rRunnable;
+    private final int DATA_REFRESH_LENGTH = 300000;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -67,6 +70,18 @@ public class CountriesFragment extends Fragment {
 
         // Configure the refreshing colors
         mSwipeRefreshLayout.setColorSchemeResources(R.color.colorPrimaryDark, R.color.colorPrimary, R.color.colorAccent);
+
+        // Refresh data
+          rHandler.postDelayed(rRunnable = new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 300 seconds
+                ((MainActivity) Objects.requireNonNull(getActivity())).reloadCountriesData();
+                Toast.makeText(getContext(), "Refreshing...!", Toast.LENGTH_SHORT).show();
+                rHandler.postDelayed(this, DATA_REFRESH_LENGTH);
+            }
+        }, DATA_REFRESH_LENGTH);  //the time is in miliseconds
+
     }
 
     @Override
@@ -120,7 +135,17 @@ public class CountriesFragment extends Fragment {
             }
         } catch (Exception e){
             e.printStackTrace();
-            Toast.makeText(getContext(), "Oops can't load data!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Oops! Can't load data!", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public void onDestroy () {
+        try {
+            rHandler.removeCallbacksAndMessages(null);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        super.onDestroy ();
     }
 }
