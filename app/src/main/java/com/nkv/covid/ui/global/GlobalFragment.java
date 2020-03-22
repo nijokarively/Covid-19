@@ -21,6 +21,9 @@ public class GlobalFragment extends Fragment {
 
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private Handler mHandler = new Handler();
+    private Handler rHandler = new Handler();
+    private Runnable rRunnable;
+    private final int DATA_REFRESH_LENGTH = 300000;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -53,7 +56,18 @@ public class GlobalFragment extends Fragment {
         });
 
         // Configure the refreshing colors
-        mSwipeRefreshLayout.setColorSchemeResources(R.color.colorPrimaryDark, R.color.colorPrimary, R.color.colorAccent);
+        mSwipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary, R.color.navBarIconActive);
+
+        // Refresh data
+        rHandler.postDelayed(rRunnable = new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 300 seconds
+                ((MainActivity) Objects.requireNonNull(getActivity())).reloadGlobalData();
+                Toast.makeText(getContext(), "Refreshing...", Toast.LENGTH_SHORT).show();
+                rHandler.postDelayed(this, DATA_REFRESH_LENGTH);
+            }
+        }, DATA_REFRESH_LENGTH);  //the time is in miliseconds
 
     }
 
@@ -73,13 +87,18 @@ public class GlobalFragment extends Fragment {
             }
         } catch (Exception e){
             e.printStackTrace();
-            Toast.makeText(getContext(), "Oops can't load data!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Oop! Can't load data!", Toast.LENGTH_SHORT).show();
         }
     }
 
     @Override
-    public void onStop(){
-        super.onStop();
+    public void onDestroy () {
+        try {
+            rHandler.removeCallbacksAndMessages(null);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        super.onDestroy ();
     }
 
 }
