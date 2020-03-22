@@ -56,7 +56,7 @@ public class GlobalFragment extends Fragment {
         });
 
         // Configure the refreshing colors
-        mSwipeRefreshLayout.setColorSchemeResources(R.color.colorPrimaryDark, R.color.colorPrimary, R.color.colorAccent);
+        mSwipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary, R.color.navBarIconActive);
 
         // Refresh data
         rHandler.postDelayed(rRunnable = new Runnable() {
