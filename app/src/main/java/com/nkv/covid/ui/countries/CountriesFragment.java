@@ -54,17 +54,18 @@ public class CountriesFragment extends Fragment {
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                ((MainActivity) Objects.requireNonNull(getActivity())).reloadCountriesData();
-
-                searchView.setQuery("", false);
-                searchView.clearFocus();
-
-                mHandler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        mSwipeRefreshLayout.setRefreshing(false);
-                    }
-                }, 3000);
+                refresh();
+//                ((MainActivity) Objects.requireNonNull(getActivity())).reloadCountriesData();
+//
+//                searchView.setQuery("", false);
+//                searchView.clearFocus();
+//
+//                mHandler.postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        mSwipeRefreshLayout.setRefreshing(false);
+//                    }
+//                }, 3000);
             }
         });
 
@@ -147,5 +148,24 @@ public class CountriesFragment extends Fragment {
             e.printStackTrace();
         }
         super.onDestroy ();
+    }
+
+    private void refresh(){
+        Objects.requireNonNull(getActivity()).runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                ((MainActivity) Objects.requireNonNull(getActivity())).reloadCountriesData();
+
+                searchView.setQuery("", false);
+                searchView.clearFocus();
+
+                mHandler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mSwipeRefreshLayout.setRefreshing(false);
+                    }
+                }, 3000);
+            }
+        });
     }
 }
